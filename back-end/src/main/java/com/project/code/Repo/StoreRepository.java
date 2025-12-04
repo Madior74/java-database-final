@@ -1,7 +1,24 @@
 package com.project.code.Repo;
 
-public interface StoreRepository {
-// 1. Add the repository interface:
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.project.code.Model.Store;
+
+public interface StoreRepository extends JpaRepository<Store,Long>{
+
+    //findById
+    Optional<Store> findById(Long id);
+
+    //findBySubName
+    @Query("SELECT s FROM Store s WHERE s.name LIKE %:pname%")  
+    List<Store> findByNameContaining(String pname);
+
+
+    // 1. Add the repository interface:
 //    - Extend JpaRepository<Store, Long> to inherit basic CRUD functionality.
 //    - This allows the repository to perform operations like save, delete, update, and find without having to implement these methods manually.
 

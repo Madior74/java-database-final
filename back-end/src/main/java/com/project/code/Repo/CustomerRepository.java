@@ -1,7 +1,20 @@
 package com.project.code.Repo;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerRepository {
+import com.project.code.Model.Customer;
+
+
+@Repository
+public interface CustomerRepository  extends JpaRepository<Customer, Long> {
+
+    //find customer by email
+    Customer findByEmail(String email);
+    //find customer by id
+    Customer findById(long id);
+
+
 // 1. Add the repository interface:
 //    - Extend JpaRepository<Customer, Long> to inherit basic CRUD functionality.
 //    - This allows the repository to perform operations like save, delete, update, and find without having to implement these methods manually.
